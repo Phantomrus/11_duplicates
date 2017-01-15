@@ -15,17 +15,17 @@ def register_creation(directory):
     return register
 
 def search_doubles(register):
-    # doubles [[имя, размер, [расположение 1, расположение 2 ... расположение n]
+    # list_of_doubles [[имя, размер, [расположение 1, расположение 2 ... расположение n]
     #           [имя, размер, [расположение 1, расположение 2 ... расположение n]]]
-    doubles = []
+    list_of_doubles = []
     for key in register:
         if len(register[key]) > 1:
-            doubles.append([key[0], key[1], register[key]])
-    return doubles
+            list_of_doubles.append([key[0], key[1], register[key]])
+    return list_of_doubles
 
 
-def print_doubles(doubles):
-    for num, element in enumerate(doubles, start =1):
+def print_doubles(list_of_doubles):
+    for num, element in enumerate(list_of_doubles, start =1):
         print("\nДублированный файл номер %s\nИмя файла: %s\nРазмер файла: %s\nВсе местоположения файла:"\
             % (num, element[0], element[1]))
         for path in element[2]:
@@ -39,13 +39,13 @@ if __name__ == '__main__':
 
     register = register_creation(directory)
 
-    doubles = search_doubles(register)
-    if doubles:
+    list_of_doubles = search_doubles(register)
+    if list_of_doubles:
         print("Реестр дублированных файлов готов.")
         while True:
             choice = input("\nВведите 1, если хотите вывести список дублей на экран.\nВведите 0, если хотите завершить программу.\n")
             if choice == "1":
-                print_doubles(doubles)
+                print_doubles(list_of_doubles)
             elif choice == "0":
                 break
             else:
