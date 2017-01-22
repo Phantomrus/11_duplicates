@@ -2,7 +2,7 @@ import os
 import argparse
 from collections import defaultdict
 
-def createParser():
+def create_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--path')
     return parser
@@ -62,7 +62,7 @@ def print_doubles(list_of_doubles):
 
 if __name__ == '__main__':
 
-    parser = createParser()
+    parser = create_parser()
     namespace = parser.parse_args()
     directory = check_path(namespace.path)
     register = creation_of_the_register(directory)
