@@ -3,21 +3,13 @@ import argparse
 from collections import defaultdict
 
 
-def create_of_the_parser():
+def create_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--path')
     return parser
 
 
-def check_of_a_directory(directory_for_check):
-    if os.path.isdir(directory_for_check):
-        return directory_for_check
-    else:
-        print("Указанной вами директории не существует.\n")
-        return False
-
-
-def create_of_the_register(directory_for_check):  
+def create_register(directory_for_check):  
     register_of_files = defaultdict(list)
 
     for root_directory, directorys, files_in_directory in os.walk(directory_for_check):
@@ -34,7 +26,7 @@ def search_for_doubles(register_of_files):
     return list_of_doubles
 
 
-def print_of_doubles(list_of_doubles):
+def print_doubles(list_of_doubles):
     if list_of_doubles:
         print("Найдены следующие дублированные файлы:")
         for num, element in enumerate(list_of_doubles.keys(), start =1):
@@ -48,13 +40,15 @@ def print_of_doubles(list_of_doubles):
 
 if __name__ == '__main__':
 
-    parser = create_of_the_parser()
+    parser = create_parser()
     arguments_of_script = parser.parse_args()
-
-    directory_for_check = check_of_a_directory(arguments_of_script.path)
-    if directory_for_check:
-        register_of_files = create_of_the_register(directory_for_check)
+    directory_for_check = arguments_of_script.path
+    
+    if os.path.isdir(directory_for_check):
+        register_of_files = create_register(directory_for_check)
         list_of_doubles = search_for_doubles(register_of_files)
-        print_of_doubles(list_of_doubles)
-
+        print_doubles(list_of_doubles)
+    else:
+        print("Указанной вами директории не существует.\n")
+        
     print("\nПрограмма завершена.")
